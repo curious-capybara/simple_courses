@@ -10,8 +10,10 @@ class PrimitiveSerializer
       { email: entity.email, id: entity.id }
     when Array
       entity.map(&method(:call))
+    when Enrollment
+      { user_id: entity.user_id, course_id: entity.course_id }
     else
-      raise RuntimeError.new("Unknown untity to serialize: #{entity.inspect}")
+      raise RuntimeError.new("Unknown entity to serialize: #{entity.inspect}")
     end
   end
 end
