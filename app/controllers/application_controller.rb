@@ -1,5 +1,6 @@
 require 'response_creator'
 
+# @private
 class ApplicationController < ActionController::API
   private
 

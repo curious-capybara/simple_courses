@@ -1,3 +1,4 @@
+# @private
 class UsersController < ApplicationController
   def create
     result = UserDomain.create_user(email: params[:email])

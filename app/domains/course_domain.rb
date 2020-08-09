@@ -36,8 +36,8 @@ module CourseDomain
 
   # Enrols user to the course
   #
-  # @params user_id [Integer] ID of the enrolled user
-  # @params course_id [Integer] ID of the course user enrolls into
+  # @param user_id [Integer] ID of the enrolled user
+  # @param course_id [Integer] ID of the course user enrolls into
   def self.enroll_user(course_id:, user_id:)
     course = Course.find_by(id: course_id)
     return Failure([:failed, { course: ['must exist'] }]) unless course
@@ -57,8 +57,8 @@ module CourseDomain
 
   # Withdraws the user from the course
   #
-  # @params user_id [Integer] ID of the user to withdraw
-  # @params course_id [Integer] ID of the course to withdraw user from
+  # @param user_id [Integer] ID of the user to withdraw
+  # @param course_id [Integer] ID of the course to withdraw user from
   def self.withdraw_user(course_id:, user_id:)
     course = Course.find_by(id: course_id)
     return Failure([:failed, { course: ['must exist'] }]) unless course

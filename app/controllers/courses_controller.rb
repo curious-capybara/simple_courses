@@ -1,3 +1,4 @@
+# @private
 class CoursesController < ApplicationController
   def create
     result = CourseDomain.create_course(name: params[:name])

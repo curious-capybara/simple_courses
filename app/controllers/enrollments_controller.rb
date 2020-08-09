@@ -1,3 +1,4 @@
+# @private
 class EnrollmentsController < ApplicationController
   def create
     result = CourseDomain.enroll_user(user_id: params[:user_id], course_id: params[:course_id])
