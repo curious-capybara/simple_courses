@@ -20,6 +20,10 @@ default: &default
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: <%= ENV['SIMPLE_COURSES_DATABASE_HOST'] || 'localhost' %>
+  password: <%= ENV['SIMPLE_COURSES_DATABASE_PASSWORD'] %>
+  port: <%= ENV['SIMPLE_COURSES_DATABASE_PORT'] || 5432 %>
+  username: postgres
 
 development:
   <<: *default
@@ -82,4 +86,3 @@ production:
   <<: *default
   database: simple_courses_production
   username: simple_courses
-  password: <%= ENV['SIMPLE_COURSES_DATABASE_PASSWORD'] %>
