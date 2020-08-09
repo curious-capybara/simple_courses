@@ -216,4 +216,57 @@ RSpec.describe CourseDomain do
       end
     end
   end
+
+  describe '#list_by_user' do
+    let(:email) { 'test@exampple.com' }
+    let!(:user) { User.create!(email: email) }
+    let(:course) { Course.create!(name: 'Ruby 101') }
+    let(:result) { CourseDomain.list_by_user(user_id: user.id) }
+
+    context 'with non-existing user' do
+      let(:result) { CourseDomain.list_by_user(user_id: user.id + 1) }
+
+      it 'returns failure' do
+        expect(result).to eq(Failure([:failed, { base: ['user does not exist'] }]))
+      end
+    end
+
+    context 'with no courses' do
+      it 'returns empty array' do
+        expect(result).to eq(Success([]))
+      end
+    end
+
+    context 'with one course' do
+      before do
+        user.enrollments.create!(course: course)
+      end
+
+      it 'returns one course' do
+        expect(result).to be_success
+        expect(result.value!.length).to eq(1)
+        expect(result.value!.first).to eq(course)
+      end
+    end
+
+    context 'with many courses' do
+      before do
+        [course, Course.create!(name: 'Silly course'), Course.create!(name: 'TDD')].each do |crs|
+          user.enrollments.create!(course: crs)
+        end
+      end
+
+      it 'returns all of them' do
+        expect(result).to be_success
+        expect(result.value!.length).to eq(3)
+      end
+
+      it 'does not return courses user is not enrolled to' do
+        additional = Course.create!(name: 'Not this one')
+        expect(result).to be_success
+        expect(result.value!.length).to eq(3)
+        expect(result.value!.none? { |course| course == additional }).to eq(true)
+      end
+    end
+  end
 end

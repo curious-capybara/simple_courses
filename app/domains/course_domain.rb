@@ -79,4 +79,14 @@ module CourseDomain
   rescue StandardError => e
     Failure([:error, e])
   end
+
+  # Returns courses user is enrolled to
+  #
+  # @param [id] User ID
+  def self.list_by_user(user_id:)
+    user = User.find_by(id: user_id)
+    return Failure([:failed, { base: ['user does not exist'] }]) unless user
+
+    Success(user.courses.to_a)
+  end
 end

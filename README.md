@@ -4,6 +4,7 @@
 |-----------|----------|--------|-------|
 | POST      | /users   | `email` (string, required) | Create new user
 | DELETE    | /users/:id || Deletes user with given id
+| GET       | /users/:id/courses || Fetch list of courses user is enrolled into
 | POST      | /courses | `name` (string, required) | Creates new course
 | DELETE    | /courses/:id || Deletes a course with given id
 | GET       | /courses || Lists courses and number of people enrolled

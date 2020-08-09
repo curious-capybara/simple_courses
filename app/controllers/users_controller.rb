@@ -9,4 +9,9 @@ class UsersController < ApplicationController
     result = UserDomain.delete_user(id: params[:id])
     render_response(result)
   end
+
+  def courses
+    result = CourseDomain.list_by_user(user_id: params[:id])
+    render_response(result)
+  end
 end

@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   post 'users', to: 'users#create'
   delete 'users/:id', to: 'users#destroy'
+  get 'users/:id/courses', to: 'users#courses'
 
   post 'courses', to: 'courses#create'
   delete 'courses/:id', to: 'courses#destroy'
